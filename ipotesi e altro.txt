@@ -1,9 +1,9 @@
 Ipotesi:
 1. Più voti ha un film, più alta è la media del voto
-2. Un utente tende a preferire lo stesso genere
-3. I film storici hanno voti più alti o più bassi in base al costumista
-4. Bei film hanno bravi attori
-5. Un attore che ha anche fatto altri ruoli ha partecipato a film con voti alti
+Bill		2. Un utente tende a preferire lo stesso genere
+Sergio		3. I film storici hanno voti più alti o più bassi in base al costumista
+Michele		4. Bei film hanno bravi attori
+Bill		5. Un attore che ha anche fatto altri ruoli ha partecipato a film con voti alti
 
 Altro:
 Attori con più film ed evoluzione temporale dei voti/popolarità/incassi
