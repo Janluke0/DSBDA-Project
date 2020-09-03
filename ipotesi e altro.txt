@@ -1,5 +1,5 @@
 Ipotesi:
-1. Più voti ha un film, più alta è la media del voto
+Gianluca	1. Più voti ha un film, più alta è la media del voto
 Bill		2. Un utente tende a preferire lo stesso genere
 Sergio		3. I film storici hanno voti più alti o più bassi in base al costumista
 Michele		4. Bei film hanno bravi attori
