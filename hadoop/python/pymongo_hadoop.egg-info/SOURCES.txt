@@ -1,0 +1,12 @@
+README.rst
+setup.py
+pymongo_hadoop/__init__.py
+pymongo_hadoop/input.py
+pymongo_hadoop/mapper.py
+pymongo_hadoop/output.py
+pymongo_hadoop/reducer.py
+pymongo_hadoop.egg-info/PKG-INFO
+pymongo_hadoop.egg-info/SOURCES.txt
+pymongo_hadoop.egg-info/dependency_links.txt
+pymongo_hadoop.egg-info/requires.txt
+pymongo_hadoop.egg-info/top_level.txt
