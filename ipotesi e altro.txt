@@ -9,3 +9,4 @@ Altro:
 Attori con più film ed evoluzione temporale dei voti/popolarità/incassi
 Least squares per incassi-costi
 Dedurre il genere dalla trama
+Recommendation system
