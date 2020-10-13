@@ -15,7 +15,7 @@ OUTPUT_URI=mongodb://127.0.0.1:27017/movie_dataset.oscar_metadata_join_out
 #QUERY={\$lookup:{from:movie_dataset.cast,localField:_id,foreignField:movie_id,as:_id}}
 
 hadoop jar $HADOOP_INSTALL/share/hadoop/tools/lib/hadoop-streaming* \
- -libjars libjars/mongo-hadoop-streaming-2.0.2.jar\
+ -libjars libjars/mongo-hadoop-streaming-2.0.2_mod.jar\
  -D stream.io.identifier.resolver.class=com.mongodb.hadoop.streaming.io.MongoIdentifierResolver\
  -D mongo.output.uri=$OUTPUT_URI\
  -D mapred.output.committer.class=com.mongodb.hadoop.mapred.output.MongoOutputCommitter\

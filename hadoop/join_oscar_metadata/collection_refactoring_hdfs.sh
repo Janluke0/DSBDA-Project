@@ -13,7 +13,7 @@ INPUT_URI=mongodb://127.0.0.1:27017/movie_dataset.oscar_awards?readPreference=pr
 #QUERY={\$lookup:{from:movie_dataset.cast,localField:_id,foreignField:movie_id,as:_id}}
 
 hadoop jar $HADOOP_INSTALL/share/hadoop/tools/lib/hadoop-streaming* \
- -libjars libjars/mongo-hadoop-streaming-2.0.2.jar\
+ -libjars libjars/mongo-hadoop-streaming-2.0.2_mod.jar\
  -D mongo.input.uri=$INPUT_URI\
  -D stream.io.identifier.resolver.class=com.mongodb.hadoop.streaming.io.MongoIdentifierResolver\
  -D mapred.output.committer.class=com.mongodb.hadoop.mapred.output.MongoOutputCommitter\
@@ -35,7 +35,7 @@ INPUT_URI=mongodb://127.0.0.1:27017/movie_dataset.metadata?readPreference=primar
 #QUERY={\$lookup:{from:movie_dataset.cast,localField:_id,foreignField:movie_id,as:_id}}
 
 hadoop jar $HADOOP_INSTALL/share/hadoop/tools/lib/hadoop-streaming* \
- -libjars libjars/mongo-hadoop-streaming-2.0.2.jar\
+ -libjars libjars/mongo-hadoop-streaming-2.0.2_mod.jar\
  -D mongo.input.uri=$INPUT_URI\
  -D stream.io.identifier.resolver.class=com.mongodb.hadoop.streaming.io.MongoIdentifierResolver\
  -D mapred.output.committer.class=com.mongodb.hadoop.mapred.output.MongoOutputCommitter\
@@ -56,7 +56,7 @@ INPUT_URI=mongodb://127.0.0.1:27017/movie_dataset.people?readPreference=primary
 #QUERY={\$lookup:{from:movie_dataset.cast,localField:_id,foreignField:movie_id,as:_id}}
 
 hadoop jar $HADOOP_INSTALL/share/hadoop/tools/lib/hadoop-streaming* \
- -libjars libjars/mongo-hadoop-streaming-2.0.2.jar\
+ -libjars libjars/mongo-hadoop-streaming-2.0.2_mod.jar\
  -D mongo.input.uri=$INPUT_URI\
  -D stream.io.identifier.resolver.class=com.mongodb.hadoop.streaming.io.MongoIdentifierResolver\
  -D mapred.output.committer.class=com.mongodb.hadoop.mapred.output.MongoOutputCommitter\
