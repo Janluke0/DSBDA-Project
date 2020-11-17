@@ -1,0 +1,73 @@
+Ipotesi: I film di genere storico sono valutati in modo migliore o peggiore in base ai costumisti.
+Metrica: Voto medio assegnato ai film dai recensori.
+
+- Sono stati recuperati tutti i film per cui fosse registrata la squadra che ci ha lavorato (in pratica deve esistere "crew"). Da essi, il campo è stato ristretto ai film storici.
+- È stato fatto un grafico per mettere in relazione i 10 migliori costumisti con i voti dei film storici a cui hanno partecipato, ma non si nota alcun tipo di trend.
+- È stato fatto un grafico per mettere in relazione i costumisti che hanno partecipato ai 20 migliori film storici con i voti dei film storici a cui hanno partecipato, ma non si possono trarre conclusioni definitive. La stessa cosa vale per il grafico con i 20 peggiori film storici.
+- Il punto precedente è stato riproposto, ma considerando solo i costumisti che hanno partecipato ad almeno 3 film, ma anche in questo caso non si possono trarre conclusioni.
+- In definitiva, l'ipotesi è falsa.
+
+
+
+
+
+Analisi: Un attore viene messo in relazione con media dei voti, popolarità e incassi dei film a cui ha partecipato.
+Metrica: Media dei voti, popolarità, incassi.
+
+- Scelto un attore, sono stati ricavati i film nel dataset a cui l'attore ha partecipato. I film sono stati ordinati per data di uscita.
+- I dati mancanti relativi agli incassi sono stati corretti attraverso la mediana.
+- È stata misurata la correlazione tra media dei voti, popolarità, incassi e data di rilascio del film. Si è trovato che il risultato dipende dall'attore scelto. Nel caso generale (considerando tutti gli attori), c'è una correlazione di 0.5 tra incassi e popolarità.
+- Sono stati fatti tre grafici per mettere in relazione i film con, rispettivamente, media dei voti, popolarità e incassi.
+- È stato fatto un grafico unico che riunisce i tre precedenti attraverso la normalizzazione dei dati.
+- Questo tipo di analisi permette di visualizzare l'assenza o presenza di un trend nella carriera dell'attore (per esempio, dopo aver partecipato a un film di successo potrebbe essere stato chiamato per film più importanti) e la relazione che intercorre tra le tre variabili dipendenti. In generale, film con alti incassi hanno anche alta popolarità.
+
+
+
+
+
+Ipotesi: Esiste una relazione tra il genere del film e la trama tale che si possa prevedere la prima dalla seconda.
+Metrica: Accuratezza ed errore a seconda del modello con l'aiuto di matrici d'adiacenza.
+
+- È stata estratta la lista dei film con trama e generi da un dataset ridotto.
+- Analisi preliminare sui generi, in cui vengono contati i generi assegnati ai film e messi in ordine decrescente. "Murder" e "violence" sono quelli in netta maggioranza; molti hanno solo qualche centinaio di film.
+
+CASO BINARIO:
+- Tra i film nel dataset, sono stati considerati solo quelli di genere "murder" e "romantic" che appartengano solo a uno dei generi.
+- È stata effettuata un'analisi preliminare sulle parole più usata considerando entrambi i generi. Un file di stopwords è stato utilizzato per eliminare i termini meno utili. "Tells" è la più usata (~11000), con "man" al secondo posto (~6600). Tra le prime 50 parole si possono già trovare termini legati ai due generi, come "police", "killed", e "love", ma ci sono anche parole più generiche come "time", "home" e "room".
+- Per la creazione del modello, si è deciso di realizzare un bag-of-words di 1000 parole e utilizzare tre tecniche: naive Bayes, logistic regression ed SVM. Le feature sono state estratte dalle trame di tutti i film, dopodiché si è passati alla divisione tra training e test.
+- Naive Bayes fornisce un'accuracy dell'83%. La buona performance è giustificata dal fatto che la suddivisione tramite bag-of-words considera le parole della trama in modo indipendente, il che permette al modello di effettuare stime valide. Dalla matrice di adiacenza si evince che il modello sbaglia più volte nel classificare i film romantici, in percentuale.
+- Logistic regression fornisce un'accuracy dell'86%. Il modello è migliore nel classificare i film di genere "murder", ma rispetto al naive Bayes sbaglia più volte per quanto riguarda quelli romantici. Utilizzando più dati si potrebbe ottenere un classificatore più accurato.
+- SVM fornice l'accuracy migliore tra tutti i modelli, pari all'87% circa. Il modello presenta meno falsi negativi per quando riguarda i film romantici rispetto al precedente.
+
+CASO GENERALE:
+- Sono stati considerati tutti i generi presenti. Poiché i film appartengono a più generi, è stato considerato solo il primo della lista, che è il più rilevante.
+- Un'analisi preliminare sulle parole usate nei film mostra che quelle più usate sono molto generiche. Anche utilizzando un file di stopwords per eliminare i termini meno utili si trovano, in ordine, "tells", "man", "house" e "time" come parole più frequenti. In particolare, la prima compare quasi il doppio delle volte rispetto alla seconda (~20000 contro ~12500).
+- Le feature sono state definite attraverso il metodo bag-of-words con un dizionario di 10000 parole, quindi il dataset è stato suddiviso tra ~9500 trame di training e ~3000 di test.
+- Come modello, si è scelto di utilizzare naive Bayes in quanto molto rapido, dato che non richiede laboriosi addestramenti. Il modello riesce ad ottenere un'accuracy del 19%, piuttosto bassa. Tuttavia, considerando la presenza di 70 generi, il risultato si può considerare in parte significativo.
+- Il modello identifica i film romantici e fantascientifici con una precisione rispettivamente del 55% e del 54%. Per gli altri generi, il modello ha una performance inferiore.
+
+CASO GENERALE CON OVERVIEW:
+- Dato che il modello generale ha una performance bassa, si è pensato di migliorarla aumentando il numero di dati. Tuttavia, il dataset utilizzato non disponde di più dati di quanti ne siano stati utilizzati. Si è deciso quindi di non considerare più la trama dei film, ma un riassunto ("overview") disponibile per ogni film nel dataset metadata generale, che comprende 32 generi diversi.
+- Poiché ai film sono assegnati più generi, per questa analisi è stato estratto solo il primo della lista.
+- Il dataset è stato diviso tra training (~38500) e test (~4300).
+- Sono state estratte tutte le parole dal dataset di training ed eliminate le stopwords. Un grafico delle occorrenze delle parole mostra che "life" e "young" sono le più utilizzate (~6600 e ~5600 volte, rispettivamente); 25 parole sono comparse più di 2000 volte, segno che alcuni termini generici sono prevalenti nel riassumere un film.
+- Le feature sono state definite attraverso il metodo bag-of-words con un dizionario di 1000 parole.
+- Come primo modello, si è scelto di utilizzare naive Bayes in quanto molto rapido, dato che non richiede laboriosi addestramenti. Il modello riesce ad ottenere un'accuracy del 42%.
+- Sono stati anche provati one-vs-all tramite logistic regression e SVM, che forniscono rispettivamente un'accuracy del 42% e 44%, quindi molto simile.
+- Tra questi tre modelli, sono stati esaminati i risultati del naive Bayes, in quanto più semplice e dalla buona performance. Il genere indovinato con più precisione è "documentario" (71%), seguito da "dramma" (54%) e "commedia" (51%); tutti gli altri hanno una precisione inferiore al 50%.
+
+
+
+
+
+Analisi: Vengono analizzate le parole più usate nei film valutati più positivamente, con i risultati divisi a seconda del genere di film.
+Metrica: Numero di occorrenze di ciascuna parola.
+
+- È stata considerata la tabella con le trame e i generi assegnati a ogni film.
+- I dati sono stati suddivisi tra training e test.
+- Analisi preliminare sui generi, in cui vengono contati i generi assegnati ai film e messi in ordine decrescente. "Murder" e "violence" sono quelli in netta maggioranza; molti hanno solo qualche centinaio di film.
+- Sono stati estratti i dati relativi alla votazione media data dai recensori ai film, quindi è stata fatta una corrispondenza con il precedente dataset.
+- Per ogni genere, sono stati considerati solo i film con una valutazione sufficiente (>7.5 nel nostro caso), quindi dalle trame sono state estratte le parole e contate. Un file di stopwords è stato utilizzato per eliminare i termini meno utili.
+- Le 25 parole più utilizzate per genere sono state presentate sotto forma di grafici. Si può dedurre che "murder", "violence", "flashback" e "revenge" sono generi molto simili, in quanto i migliori film di quei generi usano parole molto simili, come "police", "home" e "father". <Qui si può continuare l'analisi, ci sarebbero un po' di cose da dire>
+- È possibile visualizzare anche un confronto fra due generi, ma i grafici non sono facili da interpretare in quanto l'asse X, in cui sono inseriti i termini più usati, non è mai uguale per due generi diversi.
+- Dei grafici di tipo wordcloud sono presentati per ogni genere in modo tale da dare un aiuto più immediato nell'interpretazione dei risultati.
