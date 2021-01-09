@@ -52,9 +52,9 @@ def als_it_no_nu():
         P[:, j] = np.linalg.solve(U.T  @ np.diag(W[:, j]) @ U + L,
                                   U.T @ np.diag(W[:, j]) @ R[:, j])
 
-print(timeit.timeit(als_it, number=500))
-print(timeit.timeit(als_it_no_nu, number=500))
-exit()
+#print(timeit.timeit(als_it, number=500))
+#print(timeit.timeit(als_it_no_nu, number=500))
+#exit()
 
 for it in range(iterations):
     als_it()
